@@ -6,13 +6,14 @@ local modules <const>, resource <const>, context <const> = {
 local globalVarName <const> = select(2, string.strsplit('_', resource))
 
 local function requiremod(module, mod)
-    return lib.require(('code/modules/%s/mods/%s'):format(module, mod))
+    return require(('code.modules.%s.mods.%s'):format(module, mod))
 end
 
 _ENV[globalVarName] = {
-    bridge = lib.require(('code/modules/bridge/%s'):format(context)),
-    config = lib.require('config.config'),
-    requireMod = requiremod
+    bridge = require(('code.modules.bridge.%s'):format(context)),
+    config = require('config.config'),
+    requireMod = requiremod,
+    exports = {}
     -- Shared values
 }
 
@@ -26,10 +27,10 @@ CreateThread(function()
             end
         }
 
-        lib.require(('code/modules/%s/%s'):format('%s', context):format(moduleName))
+        require(('code.modules.%s.%s'):format('%s', context):format(moduleName))
     end
 
-    for name, func in pairs(_ENV[globalVarName]) do
+    for name, func in pairs(_ENV[globalVarName].exports) do
         if type(func) == 'function' then
             exports(name, func)
         end
