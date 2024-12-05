@@ -10,8 +10,6 @@ local function requiremod(module, mod)
 end
 
 _ENV[globalVarName] = {
-    bridge = require(('code.modules.bridge.%s'):format(context)),
-    config = require('config.config'),
     requireMod = requiremod,
     exports = {}
     -- Shared values
