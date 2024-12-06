@@ -25,7 +25,7 @@ CreateThread(function()
             end
         }
 
-        require(('code.modules.%s.%s'):format('%s', context):format(moduleName))
+        require(('code.modules.%s.%s'):format(moduleName, context))
     end
 
     for name, func in pairs(_ENV[globalVarName].exports) do
