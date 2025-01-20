@@ -12,20 +12,23 @@ shared_scripts {
     '@ox_lib/init.lua',
     'code/core/shared.lua',
     'code/modules/**/shared.lua',
+    'code/modules/**/sh_*.lua',
     'code/core/export_handler.lua'
 }
 
 client_scripts {
     '@bl_bridge/imports/client.lua',
     'code/core/**/client.lua',
-    'code/modules/**/client.lua'
+    'code/modules/**/client.lua',
+    'code/modules/**/cl_*.lua'
 }
 
 server_scripts {
     '@oxmysql/lib/MySQL.lua',
     '@bl_bridge/imports/server.lua',
     'code/core/**/server.lua',
-    'code/modules/**/server.lua'
+    'code/modules/**/server.lua',
+    'code/modules/**/sv_*.lua'
 }
 
 files {
