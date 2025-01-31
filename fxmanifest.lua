@@ -12,8 +12,7 @@ shared_scripts {
     '@ox_lib/init.lua',
     'code/core/shared.lua',
     'code/modules/**/shared.lua',
-    'code/modules/**/sh_*.lua',
-    'code/core/export_handler.lua'
+    'code/modules/**/sh_*.lua'
 }
 
 client_scripts {
