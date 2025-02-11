@@ -5,6 +5,7 @@ _ENV[select(2, string.strsplit('_', cache.resource))] = {
                 exports(key, value)
             end
         end
-    })
+    }),
+    config = require('data.config')
     -- Shared values
 }
