@@ -1,0 +1,11 @@
+{
+    "Lua.diagnostics.globals": [
+        "lib",
+        "cache",
+        "locale",
+        "fpscanner",
+        "noop",
+        "MySQL",
+        "Framework"
+    ]
+}
