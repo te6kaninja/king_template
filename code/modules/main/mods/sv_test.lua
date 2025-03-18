@@ -1,1 +1,1 @@
-lib.print.info('main/mods/sv_test loaded!');
+lib.print.info('main/mods/sv_test loaded!')

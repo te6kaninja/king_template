@@ -1,1 +1,1 @@
-lib.print.info('main/mods/cl_test loaded!');
+lib.print.info('main/mods/cl_test loaded!')
