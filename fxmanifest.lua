@@ -6,7 +6,7 @@ use_experimental_fxv2_oal 'yes'
 name 'king_template'
 author 'gadget2'
 description 'A script template for FiveM'
-version '1.0.1'
+version '0.0.1'
 
 shared_scripts {
     '@ox_lib/init.lua',
