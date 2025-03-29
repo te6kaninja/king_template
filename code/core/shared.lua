@@ -1,3 +1,6 @@
+lib.locale()
+
+-- This create a global variable called the second part of the resouce name (after the _)
 _ENV[select(2, string.strsplit('_', cache.resource))] = {
     exports = setmetatable({}, {
         __newindex = function(_, key, value)
