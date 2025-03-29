@@ -1,7 +1,9 @@
 local config = require('data.config')
 
-AddEventHandler('onResourceStart', function(resource)
-    if resource == cache.resource then
-        SetConvarReplicated(('ox:printlevel:%s'):format(resource), config.debug and 'debug' or 'info')
+AddEventHandler('onResourceStart', function(rsc)
+    if rsc == cache.resource then
+        if config.debug then
+            SetConvarReplicated(('ox:printlevel:%s'):format(rsc), 'debug')
+        end
     end
 end)
