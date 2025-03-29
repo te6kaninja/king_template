@@ -3,9 +3,7 @@
         "lib",
         "cache",
         "locale",
-        "fpscanner",
         "noop",
-        "MySQL",
-        "Framework"
+        "MySQL"
     ]
 }
