@@ -35,5 +35,9 @@ files {
     'data/**'
 }
 
-dependencies { 'oxmysql', 'ox_lib', 'bl_bridge' }
-ox_lib 'locale'
+escrow_ignore {
+    'data/**',
+    'locales/*.json'
+}
+
+dependencies { 'ox_lib' }
