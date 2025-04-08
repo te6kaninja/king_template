@@ -5,8 +5,8 @@ use_experimental_fxv2_oal 'yes'
 
 name 'king_template'
 author 'gadget2'
-description 'A script template for FiveM'
-version '0.0.1'
+description 'An advanced script template for FiveM'
+version '1.0.1'
 
 shared_scripts {
     '@ox_lib/init.lua',
@@ -16,7 +16,6 @@ shared_scripts {
 }
 
 client_scripts {
-    '@bl_bridge/imports/client.lua',
     'code/core/client.lua',
     'code/modules/**/client.lua',
     'code/modules/**/mods/client/*.lua'
@@ -24,7 +23,6 @@ client_scripts {
 
 server_scripts {
     '@oxmysql/lib/MySQL.lua',
-    '@bl_bridge/imports/server.lua',
     'code/core/server.lua',
     'code/modules/**/server.lua',
     'code/modules/**/mods/server/*.lua'
@@ -40,4 +38,4 @@ escrow_ignore {
     'locales/*.json'
 }
 
-dependencies { 'ox_lib' }
+dependencies { 'ox_lib', 'oxmysql' }
