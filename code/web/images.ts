@@ -2,18 +2,18 @@
 
 // Example
 
-// import name from 'path'
+import name from 'path'
 
-// const images = {
-    // name: name
-// }
+const images = {
+    name: name
+}
 
-// export default images
+export default images
 
 // -----------------------
 
 // How to use in files ?
 
-// import images from 'path'
+import images from 'path'
 
-// <img src = {images.name}>
+<img src = {images.name}/>
