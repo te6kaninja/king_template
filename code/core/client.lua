@@ -37,15 +37,26 @@ function PoliceDepartment:constructor(data)
     self.name = name
     self._departmentType = departmentType
 
-    self:createBlip(data)
     self:createZone(data)
+    self:createBlip(data)
 
     instances[id] = self
     lib.print.debug(('[PoliceDepartment] Created department %s (%s)'):format(name, departmentType))
 end
 
 function PoliceDepartment:createBlip(data)
-    
+    local blipId = AddBlipForCoord(table.unpack(self.zoneData.coords))
+    self.blipId = blipId
+
+    SetBlipSprite(blipId, data.blipData.sprite or 137)
+    SetBlipDisplay(blipId, 4)
+    SetBlipScale(blipId, data.blipData.scale or 0.8)
+    SetBlipColour(blipId, data.blipData.colour or 29)
+    SetBlipAsShortRange(blipId, true)
+
+    BeginTextCommandSetBlipName('STRING')
+    AddTextComponentSubstringPlayerName(data.blipData.name or self.name)
+    EndTextCommandSetBlipName(blipId)
 end
 
 function PoliceDepartment:createZone(data)
@@ -67,10 +78,11 @@ function PoliceDepartment:createZone(data)
     zoneData.debug = zoneData.debug or false
 
     -- Zone creation
+
+    ---@todo: add debug option
     zoneData.id = lib.points.new({
         coords = zoneData.coords,
         distance = zoneData.radius,
-        debug = zoneData.debug, ---@todo
         onEnter = function()
             self:enterZone()
         end,
