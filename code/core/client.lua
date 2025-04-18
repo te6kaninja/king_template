@@ -8,6 +8,7 @@ police.instances = instances
 ---@field name string The name of the police department.
 ---@field _departmentType string The type of the police department.
 ---@field zoneData { coords: vector3, radius: number, debug: boolean } The zone data for the police department.
+---@field blipData { sprite: number, scale: number, colour: number, name: string } The blip data for the police department.
 local PoliceDepartment = lib.class('PoliceDepartment')
 
 ---@param data PoliceDepartment
@@ -37,30 +38,15 @@ function PoliceDepartment:constructor(data)
     self.name = name
     self._departmentType = departmentType
 
-    self:createZone(data)
-    self:createBlip(data)
+    self:createZone(data.zoneData)
+    self:createBlip(data.blipData)
 
     instances[id] = self
     lib.print.debug(('[PoliceDepartment] Created department %s (%s)'):format(name, departmentType))
 end
 
-function PoliceDepartment:createBlip(data)
-    local blipId = AddBlipForCoord(table.unpack(self.zoneData.coords))
-    self.blipId = blipId
-
-    SetBlipSprite(blipId, data.blipData.sprite or 137)
-    SetBlipDisplay(blipId, 4)
-    SetBlipScale(blipId, data.blipData.scale or 0.8)
-    SetBlipColour(blipId, data.blipData.colour or 29)
-    SetBlipAsShortRange(blipId, true)
-
-    BeginTextCommandSetBlipName('STRING')
-    AddTextComponentSubstringPlayerName(data.blipData.name or self.name)
-    EndTextCommandSetBlipName(blipId)
-end
-
-function PoliceDepartment:createZone(data)
-    local id, zoneData = data.id, data.zoneData
+function PoliceDepartment:createZone(zoneData)
+    local id = self.private.id
 
     -- Data check
     if not zoneData or type(zoneData) ~= 'table' then
@@ -93,6 +79,22 @@ function PoliceDepartment:createZone(data)
     })
 
     self.zoneData = zoneData
+end
+
+function PoliceDepartment:createBlip(blipData)
+    local blipId = AddBlipForCoord(table.unpack(self.zoneData.coords))
+
+    SetBlipSprite(blipId, blipData.sprite or 137)
+    SetBlipDisplay(blipId, 4)
+    SetBlipScale(blipId, blipData.scale or 0.8)
+    SetBlipColour(blipId, blipData.colour or 29)
+    SetBlipAsShortRange(blipId, true)
+
+    BeginTextCommandSetBlipName('STRING')
+    AddTextComponentSubstringPlayerName(blipData.name or self.name)
+    EndTextCommandSetBlipName(blipId)
+
+    self.blipId = blipId
 end
 
 function PoliceDepartment:enterZone()
