@@ -5,7 +5,7 @@ return {
             {
                 zoneData = {
                     coords = vec3(462.312, -991.937, 35.122),
-                    radius = 50.0,
+                    radius = 35.0,
                     debug = true
                 },
 
