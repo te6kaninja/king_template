@@ -7,7 +7,7 @@ police.instances = instances
 ---@field id number The ID of the police department.
 ---@field name string The name of the police department.
 ---@field _departmentType string The type of the police department.
----@field zoneData { coords: vector3, radius: number, debug: boolean } The zone data for the police department.
+---@field zoneData CPoint The zone data for the police department.
 ---@field blipData { sprite: number, scale: number, colour: number, name: string } The blip data for the police department.
 local PoliceDepartment = lib.class('PoliceDepartment')
 
@@ -64,11 +64,10 @@ function PoliceDepartment:createZone(zoneData)
     zoneData.debug = zoneData.debug or false
 
     -- Zone creation
-
-    ---@todo: add debug option
-    zoneData.id = lib.points.new({
+    self.zoneData = lib.points.new({
         coords = zoneData.coords,
         distance = zoneData.radius,
+        debug = zoneData.debug,
         onEnter = function()
             self:enterZone()
         end,
@@ -78,7 +77,12 @@ function PoliceDepartment:createZone(zoneData)
         end
     })
 
-    self.zoneData = zoneData
+    if debug then
+        if not self.zoneData or not self.zoneData.id then
+            return lib.print.warn(('[PoliceDepartment] Zone data not found for department %s'):format(self.name))
+        end
+        police.utils.debugZone(true, self.zoneData)
+    end
 end
 
 function PoliceDepartment:createBlip(blipData)
@@ -107,7 +111,11 @@ end
 
 -- Loader
 
-do
+CreateThread(function()
+    lib.waitFor(function ()
+        return police.utils
+    end, 'Couldn\'t load police.utils', 2500)
+
     for departmentType, departmentData in pairs(require('data.departments')) do
         local departments, nameTemplate = departmentData.departments or {}, departmentData.nameTemplate or 'Police Department %s'
 
@@ -120,4 +128,4 @@ do
             }, department))
         end
     end
-end
+end)
