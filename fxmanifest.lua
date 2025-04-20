@@ -34,8 +34,8 @@ files {
 }
 
 escrow_ignore {
-    'data/**',
-    'locales/*.json'
+    'locales/*.json',
+    'data/**'
 }
 
 dependencies { 'ox_lib', 'oxmysql' }
